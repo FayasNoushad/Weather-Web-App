@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Weather App
+        </title>
+    </head>
+    <body>
+        <h1 align="center">Weather App</h1>
+        {{ text | safe }}
+        <br/><hr/><br/>
+        <h5 align="center">
+            <a href="/">Click Here</a> to return to home page
+        </h5>
+        {% block footer %}
+            {% include "footer.html" %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App (Home)</title>
+</head>
+<body style="text-align: center;">
+    <h1>Welcome to Weather App</h1>
+    <hr/><br/>
+    <form action="/submit" method="POST">
+        <label for="place_name">Place/City/Country Name:</label>
+        <input type="text" id="place_name" name="place_name">
+        <br/><br/>
+            <input type="reset" value="Cancel">
+            <input type="submit" value="Submit">
+    </form>
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+</body>
+</html>
