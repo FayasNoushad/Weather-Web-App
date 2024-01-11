@@ -33,7 +33,7 @@ def get_location_details(r):
             if " " in name:
                 words = name.split()
                 name = " ".join(word.capitalize() for word in words)
-        l_arr.append(f"<b>{name.capitalize()}:</b> {str(r[i])}")
+        l_arr.append(f"<b>{name}:</b> {str(r[i])}")
     text = "<br/>".join(l_arr)
     return text
 
@@ -50,10 +50,39 @@ def uv(n):
     return "Extreme"
 
 
+def get_aqi(r):
+    aqi_arr = []
+    for i in r:
+        if i=="co":
+            name = "Carbon Monoxide"
+        elif i=="no2":
+            name = "Nitrogen dioxide"
+        elif i=="o3":
+            name = "Ozone"
+        elif i=="so2":
+            name = "Sulfur dioxide"
+        elif i=="pm2_5":
+            name = "PM 2.5"
+        elif i=="pm10":
+            name = "PM 10"
+        elif i=="us-epa-index":
+            name = "US EPA Index"
+        elif i=="gb-defra-index":
+            name = "GB Defra Index"
+        else:
+            name = i.replace('_', ' ')
+            if " " in name:
+                words = name.split()
+                name = " ".join(word.capitalize() for word in words)
+        aqi_arr.append(f"<b>{name}:</b> {str(r[i])}")
+    text = "<br/>".join(aqi_arr)
+    return text
+
+
 def get_current_details(r):
     curr_arr = []
     for i in r:
-        if i=="condition":
+        if i in ["condition", "air_quality"]:
             pass
         else:
             value = str(r[i])
@@ -71,14 +100,14 @@ def get_current_details(r):
                 if " " in name:
                     words = name.split()
                     name = " ".join(word.capitalize() for word in words)
-            curr_arr.append(f"<b>{name.capitalize()}:</b> {value}")
+            curr_arr.append(f"<b>{name}:</b> {value}")
     text = "<br/>".join(curr_arr)
     return text
 
 
 # Weather checking module
 def weather(query):
-    api = f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={query}&aqi=no"
+    api = f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={query}&aqi=yes"
     r = requests.get(api).json()
     text = ""
     
@@ -90,6 +119,9 @@ def weather(query):
     
     text += "<h3>Current Weather Details</h3>"
     text += get_current_details(r['current'])
+    text += "<br/><br/>"
     
-    # text += "Name: "+r['name']
+    text += "<h3>Air Quality Details</h3>"
+    text += get_aqi(r['current']['air_quality'])
+    
     return text
