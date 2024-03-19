@@ -4,8 +4,8 @@ A simple weather web application to check weather of a specific place/city/count
 ### How to run
 
 ```sh
-git clone https://github.com/FayasNoushad/Weather-App.git
-cd Weather-App
+git clone https://github.com/FayasNoushad/Weather-Web-App.git
+cd Weather-Web-App
 python3 -m venv venv
 . ./venv/bin/activate
 pip3 install -r requirements.txt
